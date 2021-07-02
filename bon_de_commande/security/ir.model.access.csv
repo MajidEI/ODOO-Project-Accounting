@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bon_de_commande_bon_de_commande,bon_de_commande.bon_de_commande,model_bon_de_commande_bon_de_commande,,1,0,0,0

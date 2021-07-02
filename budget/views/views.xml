@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+ 
+    <record model="ir.ui.view" id="budget.list">
+      <field name="name">budget list</field>
+      <field name="model">budget.budget</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="idLinkExplo" widget="selection" />
+          <field name="code"/>
+          <field name="rubriques" />
+          <field name="budgetprevu"/>
+          <field name="budgetreel"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="budget.action_window">
+      <field name="name">budget window</field>
+      <field name="res_model">budget.budget</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+
+    <record model="ir.actions.server" id="budget.action_server">
+      <field name="name">budget server</field>
+      <field name="model_id" ref="model_budget_budget"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+
+
+    <!-- Top menu item -->
+    <menuitem name="budget" id="budget.menu_root"/>
+    
+    <!-- menu categories -->
+    <menuitem name="Menu 1" id="budget.menu_1" parent="budget.menu_root"/>
+    <menuitem name="Menu 2" id="budget.menu_2" parent="budget.menu_root"/>
+    <!-- actions -->
+    
+    <menuitem name="List" id="budget.menu_1_list" parent="budget.menu_1"
+              action="budget.action_window"/>
+    <menuitem name="Server to list" id="budget" parent="budget.menu_2"
+              action="budget.action_server"/>
+    
+  </data>
+</odoo>
